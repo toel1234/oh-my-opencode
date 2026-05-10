@@ -1,7 +1,7 @@
 > [!TIP]
 > **Building in Public**
 >
-> The maintainer builds and maintains oh-my-openagent in real-time with Jobdori, an AI assistant running on a heavily customized fork of OpenClaw.
+> The maintainer builds and maintains Oh My OpenCode in real-time with Jobdori, an AI assistant running on a heavily customized fork of OpenClaw.
 > Every feature, every fix, every issue triage — live in our Discord.
 >
 > [![Building in Public](./.github/assets/building-in-public.png)](https://discord.gg/PUwSMR9XNk)
@@ -14,11 +14,11 @@
 > > **OmO is maintained by Jobdori, the AI assistant shown above. Meet your own Jobdori — Dori. <br />Join the waitlist [here](https://sisyphuslabs.ai).**
 
 > [!TIP]
-> Be with us!
+> Follow the community!
 >
-> | [<img alt="Discord link" src="https://img.shields.io/discord/1452487457085063218?color=5865F2&label=discord&labelColor=black&logo=discord&logoColor=white&style=flat-square" width="156px" />](https://discord.gg/PUwSMR9XNk) | Join our [Discord community](https://discord.gg/PUwSMR9XNk) to connect with contributors and fellow `oh-my-openagent` users. |
+> | [<img alt="Discord link" src="https://img.shields.io/discord/1452487457085063218?color=5865F2&label=discord&labelColor=black&logo=discord&logoColor=white&style=flat-square" width="156px" />](https://discord.gg/PUwSMR9XNk) | Join our [Discord community](https://discord.gg/PUwSMR9XNk) to connect with contributors and fellow `oh-my-opencode` users. |
 > | :-----| :----- |
-> | [<img alt="X link" src="https://img.shields.io/badge/Follow-%40justsisyphus-00CED1?style=flat-square&logo=x&labelColor=black" width="156px" />](https://x.com/justsisyphus) | Updates for `oh-my-openagent` used to be posted on my X account. <br /> Since it was mistakenly suspended, [@justsisyphus](https://x.com/justsisyphus) now posts updates on my behalf. |
+> | [<img alt="X link" src="https://img.shields.io/badge/Follow-%40justsisyphus-00CED1?style=flat-square&logo=x&labelColor=black" width="156px" />](https://x.com/justsisyphus) | Updates for `Oh My OpenCode` used to be posted on my X account. <br /> Since it was mistakenly suspended, [@justsisyphus](https://x.com/justsisyphus) now posts updates on my behalf. |
 > | [<img alt="GitHub Follow" src="https://img.shields.io/github/followers/code-yeongyu?style=flat-square&logo=github&labelColor=black&color=24292f" width="156px" />](https://github.com/code-yeongyu) | Follow [@code-yeongyu](https://github.com/code-yeongyu) on GitHub for more projects. |
 
 <!-- <CENTERED SECTION FOR GITHUB DISPLAY> -->
@@ -31,7 +31,7 @@
 
 </div>
 
-> This is oh-my-openagent, running Team Mode. With Kimi K2.6 and GPT-5.5.
+> This is Oh My OpenCode, running Team Mode. With Kimi K2.6 and GPT-5.5.
 
 > Anthropic [**blocked OpenCode because of us.**](https://x.com/thdxr/status/2010149530486911014) **Yes, this is true.**
 > They want you locked in. Claude Code is a nice prison, but it's still a prison.
@@ -62,9 +62,9 @@
 
 > "If Claude Code does in 7 days what a human does in 3 months, Sisyphus does it in 1 hour. It just works until the task is done. It is a discipline agent." <br/>- B, Quant Researcher
 
-> "Knocked out 8000 eslint warnings with Oh My Opencode, just in a day" <br/>- [Jacob Ferrari](https://x.com/jacobferrari_/status/2003258761952289061)
+> "Knocked out 8000 eslint warnings with Oh My OpenCode, just in a day" <br/>- [Jacob Ferrari](https://x.com/jacobferrari_/status/2003258761952289061)
 
-> "I converted a 45k line tauri app into a SaaS web app overnight using Ohmyopencode and ralph loop. Started with interview me prompt, asked it for ratings and recommendations on the questions. It was amazing to watch it work and to wake up this morning to a mostly working website!" - [James Hargis](https://x.com/hargabyte/status/2007299688261882202)
+> "I converted a 45k line tauri app into a SaaS web app overnight using Oh My OpenCode and ralph loop. Started with interview me prompt, asked it for ratings and recommendations on the questions. It was amazing to watch it work and to wake up this morning to a mostly working website!" - [James Hargis](https://x.com/hargabyte/status/2007299688261882202)
 
 > "use oh-my-opencode, you will never go back" <br/>- [d0t3ch](https://x.com/d0t3ch/status/2001685618200580503)
 
@@ -88,7 +88,7 @@ You're juggling Claude Code, Codex, and random OSS models. Configuring workflows
 
 We did the work. Tested everything. Kept what actually shipped.
 
-Install oh-my-openagent. Type `ultrawork`. Done.
+Install `oh-my-opencode`. Type `ultrawork`. Done.
 
 
 ## Installation
@@ -98,7 +98,7 @@ Install oh-my-openagent. Type `ultrawork`. Done.
 Copy and paste this prompt to your LLM agent (Claude Code, AmpCode, Cursor, etc.):
 
 ```
-Install and configure oh-my-openagent by following the instructions here:
+Install and configure oh-my-opencode by following the instructions here:
 https://raw.githubusercontent.com/toel1234/oh-my-opencode/refs/heads/dev/docs/guide/installation.md
 ```
 
@@ -112,7 +112,7 @@ Fetch the installation guide and follow it:
 curl -s https://raw.githubusercontent.com/toel1234/oh-my-opencode/refs/heads/dev/docs/guide/installation.md
 ```
 
-**Note**: The published npm package and CLI binary are still named `oh-my-opencode` (dual-published as `oh-my-openagent` during the transition). Inside `opencode.json`, the compatibility layer now prefers the plugin entry `oh-my-openagent`, while legacy `oh-my-opencode` entries still load with a warning. Plugin config files still commonly use `oh-my-opencode.json` or `oh-my-opencode.jsonc`; both legacy and renamed basenames are recognized during the transition.
+**Note**: Oh My OpenCode is the unified, primary package. For a seamless transition, it remains dual-published as `oh-my-openagent`, but `oh-my-opencode` is the recommended package and CLI name. Configuration files (`oh-my-opencode.jsonc`) and plugin entries now prefer the unified naming, while legacy references are still supported to ensure stability.
 
 Anonymous telemetry is enabled by default to track active installations (DAU/WAU/MAU). A single event is sent at most once per UTC day per machine using a hashed installation identifier, never the raw hostname, and PostHog person profiles are not created. Disable with `OMO_SEND_ANONYMOUS_TELEMETRY=0` or `OMO_DISABLE_POSTHOG=1`. See [Privacy Policy](docs/legal/privacy-policy.md) and [Terms of Service](docs/legal/terms-of-service.md).
 
@@ -185,10 +185,10 @@ Every agent is tuned to its model's specific strengths. No manual model juggling
 
 One agent is fast. A coordinated team is *devastating*.
 
-**Team Mode** turns oh-my-openagent from "one agent with subagents" into a real multi-agent system. A lead agent orchestrates a team of category-specialized members, all running **in parallel** and communicating through dedicated tools (`team_create`, `team_send_message`, `team_task_create`, `team_status`, ...). Watch every member work simultaneously in a tmux layout with focus + grid windows.
+**Team Mode** turns oh-my-opencode from "one agent with subagents" into a real multi-agent system. A lead agent orchestrates a team of category-specialized members, all running **in parallel** and communicating through dedicated tools (`team_create`, `team_send_message`, `team_task_create`, `team_status`, ...). Watch every member work simultaneously in a tmux layout with focus + grid windows.
 
 ```jsonc
-// .opencode/oh-my-openagent.jsonc
+// .opencode/oh-my-opencode.jsonc
 {
   "team_mode": {
     "enabled": true,
@@ -296,19 +296,19 @@ Add your own under `.opencode/skills/*/SKILL.md` or `~/.config/opencode/skills/*
 
 ---
 
-> **New to oh-my-openagent?** Read the **[Overview](docs/guide/overview.md)** to understand what you have, or check the **[Orchestration Guide](docs/guide/orchestration.md)** for how agents collaborate.
+> **New to Oh My OpenCode?** Read the **[Overview](docs/guide/overview.md)** to understand what you have, or check the **[Orchestration Guide](docs/guide/orchestration.md)** for how agents collaborate.
 
 ## Uninstallation
 
-To remove oh-my-openagent:
+To remove Oh My OpenCode:
 
 1. **Remove the plugin from your OpenCode config**
 
-   Edit `~/.config/opencode/opencode.json` (or `opencode.jsonc`) and remove either `"oh-my-openagent"` or the legacy `"oh-my-opencode"` entry from the `plugin` array:
+   Edit `~/.config/opencode/opencode.json` (or `opencode.jsonc`) and remove the `"oh-my-opencode"` entry from the `plugin` array:
 
    ```bash
    # Using jq
-   jq '.plugin = [.plugin[] | select(. != "oh-my-openagent" and . != "oh-my-opencode")]' \
+   jq '.plugin = [.plugin[] | select(. != "oh-my-opencode")]' \
        ~/.config/opencode/opencode.json > /tmp/oc.json && \
        mv /tmp/oc.json ~/.config/opencode/opencode.json
    ```
@@ -316,13 +316,11 @@ To remove oh-my-openagent:
 2. **Remove configuration files (optional)**
 
    ```bash
-   # Remove plugin config files recognized during the compatibility window
-   rm -f ~/.config/opencode/oh-my-openagent.jsonc ~/.config/opencode/oh-my-openagent.json \
-         ~/.config/opencode/oh-my-opencode.jsonc ~/.config/opencode/oh-my-opencode.json
+   # Remove plugin config files
+   rm -f ~/.config/opencode/oh-my-opencode.jsonc ~/.config/opencode/oh-my-opencode.json
 
    # Remove project config (if exists)
-   rm -f .opencode/oh-my-openagent.jsonc .opencode/oh-my-openagent.json \
-         .opencode/oh-my-opencode.jsonc .opencode/oh-my-opencode.json
+   rm -f .opencode/oh-my-opencode.jsonc .opencode/oh-my-opencode.json
    ```
 
 3. **Verify removal**
@@ -361,7 +359,7 @@ Opinionated defaults, adjustable if you insist.
 See [Configuration Documentation](docs/reference/configuration.md).
 
 **Quick Overview:**
-- **Config Locations**: User config plus walked `.opencode/oh-my-openagent.json[c]` configs up to `$HOME`; closest wins. Legacy `oh-my-opencode.json[c]` still works.
+- **Config Locations**: User config plus walked `.opencode/oh-my-opencode.json[c]` configs up to `$HOME`; closest wins.
 - **JSONC Support**: Comments and trailing commas supported
 - **Agents**: Override models, temperatures, prompts, and permissions for any agent
 - **Built-in Skills**: `playwright` (browser automation), `git-master` (atomic commits)
@@ -384,7 +382,7 @@ I burned through $24K in LLM tokens on personal projects. Tried every tool. Conf
 
 Every problem I hit, the fix is baked into this plugin. Install and go.
 
-If OpenCode is Debian/Arch, oh-my-openagent is Ubuntu/[Omarchy](https://omarchy.org/).
+If OpenCode is Debian/Arch, Oh My OpenCode is Ubuntu/[Omarchy](https://omarchy.org/).
 
 Heavily influenced by [AmpCode](https://ampcode.com) and [Claude Code](https://code.claude.com/docs/overview). Features ported, often improved. Still building. It's **Open**Code.
 

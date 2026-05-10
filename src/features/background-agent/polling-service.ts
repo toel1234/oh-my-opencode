@@ -8,8 +8,11 @@ export interface PollingTarget {
 export class PollingService {
   private pollingInterval: Timer | undefined
   private isPolling = false
+  private intervalMs: number
 
-  constructor(private target: PollingTarget) {}
+  constructor(private target: PollingTarget, intervalMs = POLLING_INTERVAL_MS) {
+    this.intervalMs = intervalMs
+  }
 
   start(): void {
     if (this.pollingInterval) return
@@ -26,7 +29,7 @@ export class PollingService {
       } finally {
         this.isPolling = false
       }
-    }, POLLING_INTERVAL_MS)
+    }, this.intervalMs)
     this.pollingInterval.unref()
   }
 

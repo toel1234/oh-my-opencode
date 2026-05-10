@@ -109,7 +109,7 @@ Or read the [Installation Guide](docs/guide/installation.md), but seriously, let
 Fetch the installation guide and follow it:
 
 ```bash
-curl -s https://raw.githubusercontent.com/toel1234/oh-my-opencode/refs/heads/dev/docs/guide/installation.md
+ curl -fsSL https://raw.githubusercontent.com/toel1234/oh-my-opencode/main/docs/guide/installation.md
 ```
 
 **Note**: Oh My OpenCode is the unified, primary package. For a seamless transition, it remains dual-published as `oh-my-openagent`, but `oh-my-opencode` is the recommended package and CLI name. Configuration files (`oh-my-opencode.jsonc`) and plugin entries now prefer the unified naming, while legacy references are still supported to ensure stability.

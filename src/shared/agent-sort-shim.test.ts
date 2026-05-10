@@ -2,7 +2,7 @@
 
 import { afterEach, beforeAll, describe, expect, test } from "bun:test"
 
-import { installAgentSortShim, setAgentSortOrder } from "./agent-sort-shim"
+import { installAgentSortShim, setAgentSortOrder, uninstallAgentSortShim } from "./agent-sort-shim"
 import { AGENT_DISPLAY_NAMES } from "./agent-display-names"
 
 type AgentListItem = {
@@ -222,6 +222,26 @@ describe("agent-sort-shim", () => {
         // then
         expect(result).toEqual([sisyphus, hephaestus, prometheus, atlas])
       })
+    })
+  })
+
+  describe("uninstallAgentSortShim", () => {
+    test("restores native behavior", () => {
+      // given
+      installAgentSortShim()
+      const sisyphus = { name: "Sisyphus - Ultraworker" }
+      const hephaestus = { name: "Hephaestus - Deep Agent" }
+      const prometheus = { name: "Prometheus - Plan Builder" }
+      const atlas = { name: "Atlas - Plan Executor" }
+      const input = [atlas, prometheus, hephaestus, sisyphus]
+
+      // when
+      uninstallAgentSortShim()
+
+      // then
+      const nativeResult = input.toSorted((a, b) => a.name.localeCompare(b.name))
+      // Native alphabetical order: Atlas, Hephaestus, Prometheus, Sisyphus
+      expect(nativeResult).toEqual([atlas, hephaestus, prometheus, sisyphus])
     })
   })
 })

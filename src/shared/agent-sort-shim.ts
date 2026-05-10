@@ -60,15 +60,19 @@ function agentComparator(
   b: unknown,
   fallback: ((a: unknown, b: unknown) => number) | undefined,
 ): number {
-  const aRank = agentRank.get(extractAgentName(a)) ?? UNRANKED
-  const bRank = agentRank.get(extractAgentName(b)) ?? UNRANKED
+  const aName = extractAgentName(a)
+  const bName = extractAgentName(b)
+  const aRank = agentRank.get(aName) ?? UNRANKED
+  const bRank = agentRank.get(bName) ?? UNRANKED
 
   if (aRank !== bRank) return aRank - bRank
   if (fallback) return fallback(a, b)
-  return 0
+  return aName.localeCompare(bName)
 }
 
 let installed = false
+let originalToSorted: any = null
+let originalSort: any = null
 
 function createAgentRank(agentOrder: readonly string[] | undefined): ReadonlyMap<string, number> {
   return new Map(
@@ -85,8 +89,8 @@ export function setAgentSortOrder(agentOrder: readonly string[] | undefined): vo
 export function installAgentSortShim(): void {
   if (installed) return
 
-  const originalToSorted = Array.prototype.toSorted
-  const originalSort = Array.prototype.sort
+  originalToSorted = Array.prototype.toSorted
+  originalSort = Array.prototype.sort
 
   function patchedToSorted(
     this: unknown[],
@@ -123,4 +127,30 @@ export function installAgentSortShim(): void {
   })
 
   installed = true
+}
+
+export function uninstallAgentSortShim(): void {
+  if (!installed) return
+
+  if (originalToSorted) {
+    Object.defineProperty(Array.prototype, "toSorted", {
+      value: originalToSorted,
+      configurable: true,
+      writable: true,
+      enumerable: false,
+    })
+  }
+
+  if (originalSort) {
+    Object.defineProperty(Array.prototype, "sort", {
+      value: originalSort,
+      configurable: true,
+      writable: true,
+      enumerable: false,
+    })
+  }
+
+  originalToSorted = null
+  originalSort = null
+  installed = false
 }

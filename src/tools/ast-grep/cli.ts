@@ -1,8 +1,9 @@
 import { spawn } from "../../shared/bun-spawn-shim"
 import { existsSync } from "fs"
 import {
-	getSgCliPath,
-	DEFAULT_TIMEOUT_MS,
+        getSgCliPath,
+        DEFAULT_TIMEOUT_MS,
+        NAPI_LANGUAGES,
 } from "./constants"
 import { ensureAstGrepBinary } from "./downloader"
 import type { CliLanguage, SgResult } from "./types"
@@ -12,23 +13,33 @@ import { collectProcessOutputWithTimeout } from "./process-output-timeout"
 import { createSgResultFromStdout } from "./sg-compact-json-output"
 
 export {
-	ensureCliAvailable,
-	getAstGrepPath,
-	isCliAvailable,
-	startBackgroundInit,
+        ensureCliAvailable,
+        getAstGrepPath,
+        isCliAvailable,
+        startBackgroundInit,
 } from "./cli-binary-path-resolution"
 
 export interface RunOptions {
-	pattern: string
-	lang: CliLanguage
-	paths?: string[]
-	globs?: string[]
-	rewrite?: string
-	context?: number
-	updateAll?: boolean
+        pattern: string
+        lang: CliLanguage
+        paths?: string[]
+        globs?: string[]
+        rewrite?: string
+        context?: number
+        updateAll?: boolean
 }
 
 export async function runSg(options: RunOptions): Promise<SgResult> {
+  // Attempt NAPI first if language is supported and not a rewrite (for now)
+  if (!options.rewrite && (NAPI_LANGUAGES as unknown as string[]).includes(options.lang)) {
+    try {
+      const { runSgNapi } = await import("./napi")
+      return await runSgNapi(options)
+    } catch (e) {
+      // Fallback to CLI on any NAPI failure
+    }
+  }
+
   // ast-grep CLI silently ignores --update-all when --json is present.
   // When both rewrite and updateAll are requested, we must run two separate
   // invocations: one with --json=compact to collect match results, and
@@ -80,44 +91,44 @@ export async function runSg(options: RunOptions): Promise<SgResult> {
 
   const timeout = DEFAULT_TIMEOUT_MS
 
-	const proc = spawn([cliPath, ...args], {
-		stdout: "pipe",
-		stderr: "pipe",
-	})
+        const proc = spawn([cliPath, ...args], {
+                stdout: "pipe",
+                stderr: "pipe",
+        })
 
-	let stdout: string
-	let stderr: string
-	let exitCode: number
+        let stdout: string
+        let stderr: string
+        let exitCode: number
 
-	try {
-		const output = await collectProcessOutputWithTimeout(proc, timeout)
-		stdout = output.stdout
-		stderr = output.stderr
-		exitCode = output.exitCode
-	} catch (error) {
-		if (error instanceof Error && error.message.includes("timeout")) {
-			return {
-				matches: [],
-				totalMatches: 0,
-				truncated: true,
-				truncatedReason: "timeout",
-				error: error.message,
-			}
-		}
+        try {
+                const output = await collectProcessOutputWithTimeout(proc, timeout)
+                stdout = output.stdout
+                stderr = output.stderr
+                exitCode = output.exitCode
+        } catch (error) {
+                if (error instanceof Error && error.message.includes("timeout")) {
+                        return {
+                                matches: [],
+                                totalMatches: 0,
+                                truncated: true,
+                                truncatedReason: "timeout",
+                                error: error.message,
+                        }
+                }
 
-		const errorMessage = error instanceof Error ? error.message : String(error)
-		const errorCode =
-			typeof error === "object" && error !== null && "code" in error
-				? (error as { code?: unknown }).code
-				: undefined
-		const isNoEntry =
-			errorCode === "ENOENT" || errorMessage.includes("ENOENT") || errorMessage.includes("not found")
+                const errorMessage = error instanceof Error ? error.message : String(error)
+                const errorCode =
+                        typeof error === "object" && error !== null && "code" in error
+                                ? (error as { code?: unknown }).code
+                                : undefined
+                const isNoEntry =
+                        errorCode === "ENOENT" || errorMessage.includes("ENOENT") || errorMessage.includes("not found")
 
-		if (isNoEntry) {
-			const downloadedPath = await ensureAstGrepBinary()
-			if (downloadedPath) {
-				return runSg(options)
-			} else {
+                if (isNoEntry) {
+                        const downloadedPath = await ensureAstGrepBinary()
+                        if (downloadedPath) {
+                                return runSg(options)
+                        } else {
         return {
           matches: [],
           totalMatches: 0,
@@ -132,13 +143,13 @@ export async function runSg(options: RunOptions): Promise<SgResult> {
       }
     }
 
-		return {
-			matches: [],
-			totalMatches: 0,
-			truncated: false,
-			error: `Failed to spawn ast-grep: ${errorMessage}`,
-		}
-	}
+                return {
+                        matches: [],
+                        totalMatches: 0,
+                        truncated: false,
+                        error: `Failed to spawn ast-grep: ${errorMessage}`,
+                }
+        }
 
   if (exitCode !== 0 && stdout.trim() === "") {
     if (stderr.includes("No files found")) {

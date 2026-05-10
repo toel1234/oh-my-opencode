@@ -3,29 +3,29 @@ import { PLUGIN_NAME, CONFIG_BASENAME, LOG_FILENAME, CACHE_DIR_NAME } from "./pl
 
 describe("plugin-identity constants", () => {
   describe("PLUGIN_NAME", () => {
-    it("equals oh-my-opencode", () => {
+    it("equals oh-my-openagent", () => {
       // given
 
       // when
 
       // then
-      expect(PLUGIN_NAME).toBe("oh-my-opencode")
+      expect(PLUGIN_NAME).toBe("oh-my-openagent")
     })
   })
 
   describe("CONFIG_BASENAME", () => {
-    it("equals oh-my-opencode", () => {
+    it("equals oh-my-openagent", () => {
       // given
 
       // when
 
       // then
-      expect(CONFIG_BASENAME).toBe("oh-my-opencode")
+      expect(CONFIG_BASENAME).toBe("oh-my-openagent")
     })
   })
 
   describe("LOG_FILENAME", () => {
-    it("equals oh-my-opencode.log", () => {
+    it("equals oh-my-openagent.log", () => {
       // given
 
       // when
@@ -36,7 +36,7 @@ describe("plugin-identity constants", () => {
   })
 
   describe("CACHE_DIR_NAME", () => {
-    it("equals oh-my-opencode", () => {
+    it("equals oh-my-openagent", () => {
       // given
 
       // when

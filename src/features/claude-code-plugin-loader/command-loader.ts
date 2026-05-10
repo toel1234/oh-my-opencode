@@ -1,11 +1,14 @@
-import { existsSync, readdirSync, readFileSync } from "fs"
+import { existsSync, readdirSync, readFileSync, statSync } from "fs"
 import { basename, join } from "path"
 import { parseFrontmatter } from "../../shared/frontmatter"
 import { isMarkdownFile } from "../../shared/file-utils"
 import { sanitizeModelField } from "../../shared/model-sanitizer"
 import { log } from "../../shared/logger"
+import { DiscoveryCache } from "../../shared/discovery-cache"
 import type { CommandDefinition, CommandFrontmatter } from "../claude-code-command-loader/types"
 import type { LoadedPlugin } from "./types"
+
+const commandCache = new DiscoveryCache<CommandDefinition>("plugin-commands")
 
 export function loadPluginCommands(plugins: LoadedPlugin[]): Record<string, CommandDefinition> {
   const commands: Record<string, CommandDefinition> = {}
@@ -23,6 +26,15 @@ export function loadPluginCommands(plugins: LoadedPlugin[]): Record<string, Comm
       const namespacedName = `${plugin.name}:${commandName}`
 
       try {
+        const stats = statSync(commandPath)
+        const hash = stats.mtimeMs.toString()
+        const cached = commandCache.get(commandPath, hash)
+
+        if (cached) {
+          commands[namespacedName] = cached
+          continue
+        }
+
         const content = readFileSync(commandPath, "utf-8")
         const { data, body } = parseFrontmatter<CommandFrontmatter>(content)
 
@@ -41,6 +53,7 @@ export function loadPluginCommands(plugins: LoadedPlugin[]): Record<string, Comm
 
         const { name: _name, argumentHint: _argumentHint, ...openCodeCompatible } = definition
         commands[namespacedName] = openCodeCompatible as CommandDefinition
+        commandCache.set(commandPath, openCodeCompatible as CommandDefinition, hash)
 
         log(`Loaded plugin command: ${namespacedName}`, { path: commandPath })
       } catch (error) {

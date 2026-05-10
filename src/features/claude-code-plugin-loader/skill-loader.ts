@@ -1,13 +1,16 @@
-import { existsSync, readdirSync, readFileSync } from "fs"
+import { existsSync, readdirSync, readFileSync, statSync } from "fs"
 import { join } from "path"
 import { parseFrontmatter } from "../../shared/frontmatter"
 import { resolveSymlink } from "../../shared/file-utils"
 import { sanitizeModelField } from "../../shared/model-sanitizer"
 import { resolveSkillPathReferences } from "../../shared/skill-path-resolver"
 import { log } from "../../shared/logger"
+import { DiscoveryCache } from "../../shared/discovery-cache"
 import type { CommandDefinition } from "../claude-code-command-loader/types"
 import type { SkillMetadata } from "../opencode-skill-loader/types"
 import type { LoadedPlugin } from "./types"
+
+const skillCache = new DiscoveryCache<CommandDefinition>("plugin-skills")
 
 export function loadPluginSkillsAsCommands(
   plugins: LoadedPlugin[],
@@ -30,6 +33,18 @@ export function loadPluginSkillsAsCommands(
       if (!existsSync(skillMdPath)) continue
 
       try {
+        const stats = statSync(skillMdPath)
+        const hash = stats.mtimeMs.toString()
+        const cached = skillCache.get(skillMdPath, hash)
+
+        if (cached) {
+          const { data } = parseFrontmatter<SkillMetadata>(readFileSync(skillMdPath, "utf-8"))
+          const skillName = data.name || entry.name
+          const namespacedName = `${plugin.name}:${skillName}`
+          skills[namespacedName] = cached
+          continue
+        }
+
         const content = readFileSync(skillMdPath, "utf-8")
         const { data, body } = parseFrontmatter<SkillMetadata>(content)
 
@@ -50,6 +65,7 @@ export function loadPluginSkillsAsCommands(
 
         const { name: _name, ...openCodeCompatible } = definition
         skills[namespacedName] = openCodeCompatible as CommandDefinition
+        skillCache.set(skillMdPath, openCodeCompatible as CommandDefinition, hash)
 
         log(`Loaded plugin skill: ${namespacedName}`, { path: resolvedPath })
       } catch (error) {

@@ -1,12 +1,15 @@
-import { existsSync, readdirSync, readFileSync } from "fs"
+import { existsSync, readdirSync, readFileSync, statSync } from "fs"
 import { basename, join } from "path"
 import { parseFrontmatter } from "../../shared/frontmatter"
 import { isMarkdownFile } from "../../shared/file-utils"
 import { log } from "../../shared/logger"
 import { parseToolsConfig } from "../../shared/parse-tools-config"
+import { DiscoveryCache } from "../../shared/discovery-cache"
 import type { AgentFrontmatter, ClaudeCodeAgentConfig } from "../claude-code-agent-loader/types"
 import { mapClaudeModelToOpenCode } from "../claude-code-agent-loader/claude-model-mapper"
 import type { LoadedPlugin } from "./types"
+
+const agentCache = new DiscoveryCache<ClaudeCodeAgentConfig>("plugin-agents")
 
 export function loadPluginAgents(plugins: LoadedPlugin[]): Record<string, ClaudeCodeAgentConfig> {
   const agents: Record<string, ClaudeCodeAgentConfig> = {}
@@ -24,6 +27,15 @@ export function loadPluginAgents(plugins: LoadedPlugin[]): Record<string, Claude
       const namespacedName = `${plugin.name}:${agentName}`
 
       try {
+        const stats = statSync(agentPath)
+        const hash = stats.mtimeMs.toString()
+        const cached = agentCache.get(agentPath, hash)
+
+        if (cached) {
+          agents[namespacedName] = cached
+          continue
+        }
+
         const content = readFileSync(agentPath, "utf-8")
         const { data, body } = parseFrontmatter<AgentFrontmatter>(content)
 
@@ -48,6 +60,8 @@ export function loadPluginAgents(plugins: LoadedPlugin[]): Record<string, Claude
         }
 
         agents[namespacedName] = config
+        agentCache.set(agentPath, config, hash)
+
         log(`Loaded plugin agent: ${namespacedName}`, { path: agentPath })
       } catch (error) {
         log(`Failed to load plugin agent: ${agentPath}`, error)

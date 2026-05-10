@@ -4,15 +4,21 @@ import path from "node:path"
 import type { TeamModeConfig } from "./manager"
 import { spawn as bunSpawn } from "../../../shared/bun-spawn-shim"
 
-async function runGit(args: string[]): Promise<{ code: number; stderr: string }> {
+async function runGit(args: string[]): Promise<{ code: number; stdout: string; stderr: string }> {
   const process = bunSpawn({ cmd: ["git", ...args], stdout: "pipe", stderr: "pipe" })
-  const [exitCode, stderrText] = await Promise.all([process.exited, new Response(process.stderr).text()])
-  return { code: exitCode, stderr: stderrText }
+  const [exitCode, stdoutText, stderrText] = await Promise.all([
+    process.exited,
+    new Response(process.stdout).text(),
+    new Response(process.stderr).text(),
+  ])
+  return { code: exitCode, stdout: stdoutText, stderr: stderrText }
 }
 
 export async function removeWorktree(worktreePath: string): Promise<void> {
-  await fs.rm(worktreePath, { recursive: true, force: true })
+  const absoluteWorktreePath = path.resolve(worktreePath)
 
+  // 1. Try to find if this worktree belongs to a superproject (submodule)
+  // We do this before deleting the directory, as we might need to run git commands from within it
   const rootLookup = bunSpawn({
     cmd: ["git", "-C", worktreePath, "rev-parse", "--show-superproject-working-tree"],
     stdout: "pipe",
@@ -22,23 +28,37 @@ export async function removeWorktree(worktreePath: string): Promise<void> {
     rootLookup.exited,
     new Response(rootLookup.stdout).text(),
     new Response(rootLookup.stderr).text(),
-  ])
-  const result =
-    rootExitCode === 0 && rootStdout.trim().length > 0
-      ? await runGit(["-C", rootStdout.trim(), "worktree", "remove", "--force", worktreePath])
-      : await runGit(["worktree", "remove", "--force", worktreePath])
+  ]).catch(() => [1, ""]) // Ignore errors if directory doesn't exist
 
-  if (
-    result.code !== 0 &&
-    !result.stderr.includes("not a worktree") &&
-    !result.stderr.includes("not a working tree") &&
-    !result.stderr.includes("already removed")
-  ) {
-    throw new Error(result.stderr.trim() || "git worktree remove failed")
+  const superprojectRoot = rootExitCode === 0 && typeof rootStdout === "string" ? rootStdout.trim() : ""
+
+  // 2. Try to remove the worktree via git
+  const removeArgs = ["worktree", "remove", "--force", absoluteWorktreePath]
+  const result = superprojectRoot
+    ? await runGit(["-C", superprojectRoot, ...removeArgs])
+    : await runGit(removeArgs)
+
+  // 3. If it failed, check if it's actually still a worktree
+  if (result.code !== 0) {
+    const listArgs = superprojectRoot
+      ? ["-C", superprojectRoot, "worktree", "list", "--porcelain"]
+      : ["worktree", "list", "--porcelain"]
+    const listResult = await runGit(listArgs)
+    const isStillWorktree = listResult.stdout
+      .split("\n")
+      .some((line) => line.startsWith("worktree ") && path.resolve(line.slice(9).trim()) === absoluteWorktreePath)
+
+    if (isStillWorktree) {
+      throw new Error(result.stderr.trim() || "git worktree remove failed")
+    }
   }
 
-  if (rootExitCode === 0 && rootStdout.trim().length > 0) {
-    await runGit(["-C", rootStdout.trim(), "worktree", "prune"])
+  // 4. Ensure directory is gone
+  await fs.rm(absoluteWorktreePath, { recursive: true, force: true })
+
+  // 5. Cleanup superproject if needed
+  if (superprojectRoot) {
+    await runGit(["-C", superprojectRoot, "worktree", "prune"])
   }
 }
 

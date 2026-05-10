@@ -124,3 +124,54 @@ Inject the polling service into `BackgroundManager`.
 
 Run: `npx bun test src/features/background-agent/manager.test.ts`
 Expected: PASS.
+
+### Task 4: Fix Sort Shim Logic and Tie-Breaking
+
+**Files:**
+- Modify: `oh-my-openagent/src/shared/agent-sort-shim.ts`
+
+**Step 1: Ensure canonical order in `agentComparator`**
+
+Fix the fallback logic to avoid native alphabetical sort swapping Sisyphus and Atlas.
+
+```typescript
+function agentComparator(a: unknown, b: unknown, fallback: any): number {
+  const aName = extractAgentName(a);
+  const bName = extractAgentName(b);
+  const aRank = agentRank.get(aName) ?? UNRANKED;
+  const bRank = agentRank.get(bName) ?? UNRANKED;
+
+  if (aRank !== bRank) return aRank - bRank;
+  if (fallback) return fallback(a, b);
+  // Remove name-based localeCompare if we want to strictly follow rank
+  return 0;
+}
+```
+
+**Step 2: Verify with tests**
+
+Run: `npx bun test src/shared/agent-runtime-name-sort.test.ts`
+Expected: PASS.
+
+### Task 5: Language-Agnostic Archive Validator Test
+
+**Files:**
+- Modify: `oh-my-openagent/src/shared/archive-entry-validator.test.ts`
+
+**Step 1: Relax assertion on tar output**
+
+Change the regex to look for ".." or exit status instead of the English phrase "path traversal".
+
+### Task 6: Implement Discovery Caching
+
+**Files:**
+- Create: `oh-my-openagent/src/shared/discovery-cache.ts`
+- Modify: `oh-my-openagent/src/plugin-handlers/skill-handler.ts` (or equivalent)
+
+**Step 1: Implement Cache Utility**
+
+Create a simple file-based cache for discovered skills and agents.
+
+**Step 2: Integrate into initialization**
+
+Check the cache before performing heavy filesystem scans.

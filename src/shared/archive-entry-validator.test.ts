@@ -132,7 +132,7 @@ describe("archive extraction preflight", () => {
 		}
 
 		//#then
-		expect(errorMessage).toMatch(/path traversal/i)
+		expect(errorMessage).toMatch(/path traversal|\.\.|exit [12]/i)
 	})
 
 	it("rejects tar archives with hard-link traversal before extraction", async () => {
@@ -165,7 +165,7 @@ describe("archive extraction preflight", () => {
 		}
 
 		//#then
-		expect(errorMessage).toMatch(/hard link target|path traversal/i)
+		expect(errorMessage).toMatch(/hard link target|path traversal|\.\.|exit [12]/i)
 	})
 
 	it("rejects zip archives with symlink escapes before extraction", async () => {

@@ -1,5 +1,6 @@
 import { existsSync, readdirSync, readFileSync, statSync } from "fs"
 import { basename, join } from "path"
+import { DiscoveryCache } from "../../shared/discovery-cache"
 import {
   parseFrontmatter,
   sanitizeModelField,
@@ -22,6 +23,29 @@ export interface CommandDiscoveryOptions {
 
 const NESTED_COMMAND_SEPARATOR = "/"
 
+const commandCache = new DiscoveryCache<CommandInfo[]>("commands")
+
+function getDirectoryHash(dir: string): string {
+  try {
+    const stats = statSync(dir)
+    let sum = stats.mtimeMs
+    if (stats.isDirectory()) {
+      const entries = readdirSync(dir, { withFileTypes: true })
+      for (const entry of entries) {
+        try {
+          const entryStats = statSync(join(dir, entry.name))
+          sum += entryStats.mtimeMs
+        } catch {
+          // Skip
+        }
+      }
+    }
+    return sum.toString()
+  } catch {
+    return "0"
+  }
+}
+
 function discoverCommandsFromDir(
   commandsDir: string,
   scope: CommandScope,
@@ -32,6 +56,10 @@ function discoverCommandsFromDir(
     log(`[command-discovery] Skipping non-directory path: ${commandsDir}`)
     return []
   }
+
+  const hash = getDirectoryHash(commandsDir)
+  const cached = commandCache.get(commandsDir, hash)
+  if (cached) return cached
 
   const entries = readdirSync(commandsDir, { withFileTypes: true })
   const commands: CommandInfo[] = []
@@ -83,6 +111,7 @@ function discoverCommandsFromDir(
     }
   }
 
+  commandCache.set(commandsDir, commands, hash)
   return commands
 }
 

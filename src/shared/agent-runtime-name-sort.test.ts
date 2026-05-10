@@ -1,6 +1,6 @@
 /// <reference types="bun-types" />
 
-import { beforeAll, describe, expect, test } from "bun:test"
+import { beforeEach, describe, expect, test } from "bun:test"
 
 import {
   AGENT_DISPLAY_NAMES,
@@ -33,7 +33,7 @@ function simulateOpencodeSort(agentNames: string[], defaultName: string): string
 }
 
 describe("OpenCode Agent.list() sort with runtime display names", () => {
-  beforeAll(() => {
+  beforeEach(() => {
     installAgentSortShim()
   })
 

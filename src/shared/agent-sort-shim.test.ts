@@ -1,6 +1,6 @@
 /// <reference types="bun-types" />
 
-import { afterEach, beforeAll, describe, expect, test } from "bun:test"
+import { afterEach, beforeEach, describe, expect, test } from "bun:test"
 
 import { installAgentSortShim, setAgentSortOrder, uninstallAgentSortShim } from "./agent-sort-shim"
 import { AGENT_DISPLAY_NAMES } from "./agent-display-names"
@@ -17,7 +17,7 @@ declare global {
 }
 
 describe("agent-sort-shim", () => {
-  beforeAll(() => {
+  beforeEach(() => {
     installAgentSortShim()
   })
 

@@ -26,7 +26,7 @@
  */
 
 import { DEFAULT_AGENT_ORDER, resolveAgentOrderDisplayNames } from "./agent-ordering"
-import { getAgentListDisplayName } from "./agent-display-names"
+import { getAgentConfigKey, getAgentDisplayName, getAgentListDisplayName } from "./agent-display-names"
 
 let agentRank: ReadonlyMap<string, number> = createAgentRank(undefined)
 const AGENT_ARRAY_SENTINELS = new Set(
@@ -49,7 +49,7 @@ function isAgentArray(arr: ReadonlyArray<unknown>): boolean {
     if (element === null || typeof element !== "object") return false
     const name = (element as { name?: unknown }).name
     if (typeof name !== "string") return false
-    if (AGENT_ARRAY_SENTINELS.has(name)) rankedCount++
+    if (AGENT_ARRAY_SENTINELS.has(name) || AGENT_ARRAY_SENTINELS.has(getAgentDisplayName(getAgentConfigKey(name)))) rankedCount++
   }
 
   return rankedCount >= 2
@@ -62,12 +62,12 @@ function agentComparator(
 ): number {
   const aName = extractAgentName(a)
   const bName = extractAgentName(b)
-  const aRank = agentRank.get(aName) ?? UNRANKED
-  const bRank = agentRank.get(bName) ?? UNRANKED
+  const aRank = agentRank.get(getAgentDisplayName(getAgentConfigKey(aName))) ?? UNRANKED
+  const bRank = agentRank.get(getAgentDisplayName(getAgentConfigKey(bName))) ?? UNRANKED
 
   if (aRank !== bRank) return aRank - bRank
   if (fallback) return fallback(a, b)
-  return aName.localeCompare(bName)
+  return 0
 }
 
 let installed = false

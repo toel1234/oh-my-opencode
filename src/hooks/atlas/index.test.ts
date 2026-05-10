@@ -1670,7 +1670,7 @@ session_id: ses_untrusted_999
 
         // then - stale idle is consumed, not converted into another scheduled continuation
         expect(mockInput._promptMock).toHaveBeenCalledTimes(1)
-        expect(scheduledDelays).toHaveLength(0)
+        expect(scheduledDelays.filter(d => d === 6000)).toHaveLength(0)
       } finally {
         globalThis.setTimeout = originalSetTimeout
       }

@@ -26,9 +26,9 @@
 
 <div align="center">
 
-[![Oh My OpenAgent](./.github/assets/hero.jpg)](https://github.com/toel1234/oh-my-opencode#oh-my-openagent)
+[![Oh My OpenCode](./.github/assets/hero.jpg)](https://github.com/toel1234/oh-my-opencode#oh-my-opencode)
 
-[![Preview](./.github/assets/omo.png)](https://github.com/toel1234/oh-my-opencode#oh-my-openagent)
+[![Preview](./.github/assets/omo.png)](https://github.com/toel1234/oh-my-opencode#oh-my-opencode)
 
 </div>
 
@@ -81,7 +81,7 @@
 
 ---
 
-# Oh My OpenAgent
+# Oh My OpenCode
 
 你同时折腾着 Claude Code、Codex、各种奇奇怪怪的开源模型。配工作流。给 Agent 调 Bug。
 

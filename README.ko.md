@@ -25,9 +25,9 @@
 
 <div align="center">
 
-[![Oh My OpenAgent](./.github/assets/hero.jpg)](https://github.com/toel1234/oh-my-opencode#oh-my-openagent)
+[![Oh My OpenCode](./.github/assets/hero.jpg)](https://github.com/toel1234/oh-my-opencode#oh-my-opencode)
 
-[![Preview](./.github/assets/omo.png)](https://github.com/toel1234/oh-my-opencode#oh-my-openagent)
+[![Preview](./.github/assets/omo.png)](https://github.com/toel1234/oh-my-opencode#oh-my-opencode)
 
 </div>
 
@@ -82,7 +82,7 @@
 
 ---
 
-# Oh My OpenAgent
+# Oh My OpenCode
 
 Claude Code, Codex, 듣도 보도 못한 OSS 모델들까지 저글링 중이시죠. 워크플로우를 손보고, 에이전트를 디버깅하고.
 

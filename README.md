@@ -25,9 +25,9 @@
 
 <div align="center">
 
-[![Oh My OpenAgent](./.github/assets/hero.jpg)](https://github.com/toel1234/oh-my-opencode#oh-my-openagent)
+[![Oh My OpenCode](./.github/assets/hero.jpg)](https://github.com/toel1234/oh-my-opencode#oh-my-opencode)
 
-[![Preview](./.github/assets/omo.png)](https://github.com/toel1234/oh-my-opencode#oh-my-openagent)
+[![Preview](./.github/assets/omo.png)](https://github.com/toel1234/oh-my-opencode#oh-my-opencode)
 
 </div>
 
@@ -82,7 +82,7 @@
 
 ---
 
-# Oh My OpenAgent
+# Oh My OpenCode
 
 You're juggling Claude Code, Codex, and random OSS models. Configuring workflows. Debugging agents.
 

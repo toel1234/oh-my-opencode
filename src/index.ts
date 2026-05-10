@@ -30,7 +30,7 @@ type HooksWithCompactionAutocontinue = Hooks & {
 const serverPlugin: Plugin = async (input, _options): Promise<Hooks> => {
   installAgentSortShim()
   initConfigContext("opencode", null)
-  log("[oh-my-openagent] ENTRY - plugin loading", {
+  log("[oh-my-opencode] ENTRY - plugin loading", {
     directory: input.directory,
   })
   logLegacyPluginStartupWarning()

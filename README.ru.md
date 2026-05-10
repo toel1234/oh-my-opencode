@@ -26,9 +26,9 @@
 
 <div align="center">
 
-[![Oh My OpenAgent](./.github/assets/hero.jpg)](https://github.com/toel1234/oh-my-opencode#oh-my-openagent)
+[![Oh My OpenCode](./.github/assets/hero.jpg)](https://github.com/toel1234/oh-my-opencode#oh-my-opencode)
 
-[![Preview](./.github/assets/omo.png)](https://github.com/toel1234/oh-my-opencode#oh-my-openagent)
+[![Preview](./.github/assets/omo.png)](https://github.com/toel1234/oh-my-opencode#oh-my-opencode)
 
 </div>
 
@@ -81,7 +81,7 @@
 
 ------
 
-# Oh My OpenAgent
+# Oh My OpenCode
 
 Вы жонглируете Claude Code, Codex, случайными OSS-моделями. Настраиваете рабочие процессы. Дебажите агентов.
 

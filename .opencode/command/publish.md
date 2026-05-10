@@ -339,7 +339,7 @@ If any platform package version doesn't match, warn the user and suggest checkin
 
 Report success to user with:
 - New version number
-- GitHub release URL: https://github.com/code-yeongyu/oh-my-opencode/releases/tag/v{version}
+- GitHub release URL: https://github.com/toel1234/oh-my-opencode/releases/tag/v{version}
 - npm package URL: https://www.npmjs.com/package/oh-my-opencode
 - Platform packages status: List all 7 platform packages with their versions
 

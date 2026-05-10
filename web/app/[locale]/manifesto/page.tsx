@@ -345,7 +345,7 @@ async function ManifestoPage() {
           </h2>
 
           <Button size="lg" className="rounded-full px-8 py-6 text-lg" asChild>
-            <Link href="https://github.com/code-yeongyu/oh-my-openagent" target="_blank">
+            <Link href="https://github.com/toel1234/oh-my-opencode" target="_blank">
               {t("finalCta.button")} <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>

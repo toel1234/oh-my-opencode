@@ -62,7 +62,7 @@ If English isn't your first language, don't worry! We value your contributions r
 
 ```bash
 # Clone the repository
-git clone https://github.com/code-yeongyu/oh-my-openagent.git
+git clone https://github.com/toel1234/oh-my-opencode.git
 cd oh-my-openagent
 
 # Install dependencies (bun only - never use npm/yarn)

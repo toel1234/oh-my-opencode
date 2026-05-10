@@ -67,14 +67,14 @@ jobs:
 
   preflight-trust:
     runs-on: ubuntu-latest
-    if: github.repository == 'code-yeongyu/oh-my-openagent'
+    if: github.repository == 'toel1234/oh-my-opencode'
     permissions:
       id-token: write
       contents: read
     steps:
       - name: Verify trusted publisher for all 24 packages
         env:
-          REPO: code-yeongyu/oh-my-openagent
+          REPO: toel1234/oh-my-opencode
           WORKFLOW_FILE: publish.yml
         run: |
           OIDC_TOKEN=$(curl -sH "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" \
@@ -135,7 +135,7 @@ jobs:
   publish-main:
     runs-on: ubuntu-latest
     needs: [test, typecheck, preflight-trust]
-    if: github.repository == 'code-yeongyu/oh-my-openagent'
+    if: github.repository == 'toel1234/oh-my-opencode'
     outputs:
       version: ${{ steps.version.outputs.version }}
       dist_tag: ${{ steps.version.outputs.dist_tag }}

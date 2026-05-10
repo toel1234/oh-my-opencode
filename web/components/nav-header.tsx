@@ -35,7 +35,7 @@ export function NavHeader() {
         </div>
         <div className="flex items-center gap-4">
           <a
-            href="https://github.com/code-yeongyu/oh-my-openagent"
+            href="https://github.com/toel1234/oh-my-opencode"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden sm:flex"
@@ -102,7 +102,7 @@ export function NavHeader() {
             {t("manifesto")}
           </Link>
           <a
-            href="https://github.com/code-yeongyu/oh-my-openagent"
+            href="https://github.com/toel1234/oh-my-opencode"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 transition-colors hover:text-cyan-400 sm:hidden"

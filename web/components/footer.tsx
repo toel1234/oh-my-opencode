@@ -19,7 +19,7 @@ export async function Footer({ locale }: { locale?: string } = {}) {
           </div>
           <div className="flex items-center gap-8 text-sm text-zinc-400">
             <a
-              href="https://github.com/code-yeongyu/oh-my-openagent"
+              href="https://github.com/toel1234/oh-my-opencode"
               target="_blank"
               rel="noopener noreferrer"
               className="transition-colors hover:text-cyan-400"

@@ -132,7 +132,7 @@ Defaults                   (Zod safeParse fills omitted fields)
 - `mcp_env_allowlist`: **user-only** for security; walked configs cannot extend it
 - `migrateConfigFile()` rewrites legacy keys (idempotent via `_migrations` tracking + timestamped backups)
 
-Schema autocomplete: `"$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json"`
+Schema autocomplete: `"$schema": "https://raw.githubusercontent.com/toel1234/oh-my-opencode/dev/assets/oh-my-opencode.schema.json"`
 
 ## THREE-TIER MCP SYSTEM
 

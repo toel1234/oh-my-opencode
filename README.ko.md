@@ -25,9 +25,9 @@
 
 <div align="center">
 
-[![Oh My OpenAgent](./.github/assets/hero.jpg)](https://github.com/code-yeongyu/oh-my-openagent#oh-my-openagent)
+[![Oh My OpenAgent](./.github/assets/hero.jpg)](https://github.com/toel1234/oh-my-opencode#oh-my-openagent)
 
-[![Preview](./.github/assets/omo.png)](https://github.com/code-yeongyu/oh-my-openagent#oh-my-openagent)
+[![Preview](./.github/assets/omo.png)](https://github.com/toel1234/oh-my-opencode#oh-my-openagent)
 
 </div>
 
@@ -41,14 +41,14 @@
 
 <div align="center">
 
-[![GitHub Release](https://img.shields.io/github/v/release/code-yeongyu/oh-my-openagent?color=369eff&labelColor=black&logo=github&style=flat-square)](https://github.com/code-yeongyu/oh-my-openagent/releases)
+[![GitHub Release](https://img.shields.io/github/v/release/toel1234/oh-my-opencode?color=369eff&labelColor=black&logo=github&style=flat-square)](https://github.com/toel1234/oh-my-opencode/releases)
 [![npm downloads](https://img.shields.io/endpoint?url=https%3A%2F%2Fohmyopenagent.com%2Fapi%2Fnpm-downloads&style=flat-square)](https://www.npmjs.com/package/oh-my-opencode)
-[![GitHub Contributors](https://img.shields.io/github/contributors/code-yeongyu/oh-my-openagent?color=c4f042&labelColor=black&style=flat-square)](https://github.com/code-yeongyu/oh-my-openagent/graphs/contributors)
-[![GitHub Forks](https://img.shields.io/github/forks/code-yeongyu/oh-my-openagent?color=8ae8ff&labelColor=black&style=flat-square)](https://github.com/code-yeongyu/oh-my-openagent/network/members)
-[![GitHub Stars](https://img.shields.io/github/stars/code-yeongyu/oh-my-openagent?color=ffcb47&labelColor=black&style=flat-square)](https://github.com/code-yeongyu/oh-my-openagent/stargazers)
-[![GitHub Issues](https://img.shields.io/github/issues/code-yeongyu/oh-my-openagent?color=ff80eb&labelColor=black&style=flat-square)](https://github.com/code-yeongyu/oh-my-openagent/issues)
-[![License](https://img.shields.io/badge/license-SUL--1.0-white?labelColor=black&style=flat-square)](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/LICENSE.md)
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/code-yeongyu/oh-my-openagent)
+[![GitHub Contributors](https://img.shields.io/github/contributors/toel1234/oh-my-opencode?color=c4f042&labelColor=black&style=flat-square)](https://github.com/toel1234/oh-my-opencode/graphs/contributors)
+[![GitHub Forks](https://img.shields.io/github/forks/toel1234/oh-my-opencode?color=8ae8ff&labelColor=black&style=flat-square)](https://github.com/toel1234/oh-my-opencode/network/members)
+[![GitHub Stars](https://img.shields.io/github/stars/toel1234/oh-my-opencode?color=ffcb47&labelColor=black&style=flat-square)](https://github.com/toel1234/oh-my-opencode/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/toel1234/oh-my-opencode?color=ff80eb&labelColor=black&style=flat-square)](https://github.com/toel1234/oh-my-opencode/issues)
+[![License](https://img.shields.io/badge/license-SUL--1.0-white?labelColor=black&style=flat-square)](https://github.com/toel1234/oh-my-opencode/blob/dev/LICENSE.md)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/toel1234/oh-my-opencode)
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | [简体中文](README.zh-cn.md)
 
@@ -99,7 +99,7 @@ oh-my-openagent를 설치하세요. `ultrawork`를 입력하세요. 끝.
 
 ```
 Install and configure oh-my-openagent by following the instructions here:
-https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/refs/heads/dev/docs/guide/installation.md
+https://raw.githubusercontent.com/toel1234/oh-my-opencode/refs/heads/dev/docs/guide/installation.md
 ```
 
 아니면 [설치 가이드](docs/guide/installation.md)를 직접 읽으셔도 됩니다. 다만 진심으로, 에이전트한테 시키세요. 사람은 설정 파일을 오타로 망칩니다.
@@ -109,7 +109,7 @@ https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/refs/heads/dev/do
 설치 가이드를 받아와서 그대로 따르세요:
 
 ```bash
-curl -s https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/refs/heads/dev/docs/guide/installation.md
+curl -s https://raw.githubusercontent.com/toel1234/oh-my-opencode/refs/heads/dev/docs/guide/installation.md
 ```
 
 **참고**: 배포된 npm 패키지와 CLI 바이너리 이름은 여전히 `oh-my-opencode`입니다(전환 기간 동안 `oh-my-openagent`로도 함께 배포됩니다). `opencode.json` 안에서는 호환성 레이어가 이제 `oh-my-openagent` 플러그인 엔트리를 우선합니다. 기존 `oh-my-opencode` 엔트리도 경고와 함께 여전히 로드됩니다. 플러그인 설정 파일도 여전히 `oh-my-opencode.json`이나 `oh-my-opencode.jsonc`를 많이 씁니다. 전환 기간 동안에는 기존 이름과 새 이름 둘 다 인식됩니다.
@@ -123,7 +123,7 @@ curl -s https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/refs/head
 이제 문서 읽는 시대는 지났습니다. 그냥 아래를 에이전트에 붙여넣으세요:
 
 ```
-Read this and tell me why it's not just another boilerplate: https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/refs/heads/dev/README.md
+Read this and tell me why it's not just another boilerplate: https://raw.githubusercontent.com/toel1234/oh-my-opencode/refs/heads/dev/README.md
 ```
 
 

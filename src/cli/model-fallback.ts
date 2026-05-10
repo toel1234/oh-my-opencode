@@ -23,7 +23,7 @@ export type { GeneratedOmoConfig } from "./model-fallback-types"
 const ZAI_MODEL = "zai-coding-plan/glm-4.7"
 
 const ULTIMATE_FALLBACK = "opencode/gpt-5-nano"
-const SCHEMA_URL = "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json"
+const SCHEMA_URL = "https://raw.githubusercontent.com/toel1234/oh-my-opencode/dev/assets/oh-my-opencode.schema.json"
 
 function toFallbackModelObject(entry: FallbackEntry, provider: string): FallbackModelObject {
   return {

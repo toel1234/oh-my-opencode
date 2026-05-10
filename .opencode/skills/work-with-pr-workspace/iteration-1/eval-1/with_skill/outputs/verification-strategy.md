@@ -104,7 +104,7 @@ Cubic is an automated code review bot that analyzes the PR diff. It must respond
 ### Recovery
 ```bash
 # Read Cubic's review
-gh api repos/code-yeongyu/oh-my-openagent/pulls/<PR_NUMBER>/reviews
+gh api repos/toel1234/oh-my-opencode/pulls/<PR_NUMBER>/reviews
 
 # Address each comment
 # ... edit files ...

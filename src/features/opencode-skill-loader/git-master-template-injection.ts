@@ -101,7 +101,7 @@ function buildCommitFooterInjection(
 		const footerText =
 			typeof commitFooter === "string"
 				? commitFooter
-				: "Ultraworked with [Sisyphus](https://github.com/code-yeongyu/oh-my-openagent)"
+				: "Ultraworked with [Sisyphus](https://github.com/toel1234/oh-my-opencode)"
 		sections.push("1. **Footer in commit body:**")
 		sections.push("```")
 		sections.push(footerText)
@@ -121,7 +121,7 @@ function buildCommitFooterInjection(
 		const footerText =
 			typeof commitFooter === "string"
 				? commitFooter
-				: "Ultraworked with [Sisyphus](https://github.com/code-yeongyu/oh-my-openagent)"
+				: "Ultraworked with [Sisyphus](https://github.com/toel1234/oh-my-opencode)"
 		sections.push("**Example (both enabled):**")
 		sections.push("```bash")
 		sections.push(
@@ -132,7 +132,7 @@ function buildCommitFooterInjection(
 		const footerText =
 			typeof commitFooter === "string"
 				? commitFooter
-				: "Ultraworked with [Sisyphus](https://github.com/code-yeongyu/oh-my-openagent)"
+				: "Ultraworked with [Sisyphus](https://github.com/toel1234/oh-my-opencode)"
 		sections.push("**Example:**")
 		sections.push("```bash")
 		sections.push(`${cmdPrefix}git commit -m "{Commit Message}" -m "${footerText}"`)
